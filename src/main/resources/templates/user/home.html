@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+
+    <title>Home page</title>
+</head>
+<body>
+    <h1>Hello user ! ! ! </h1>
+    <p th:text="'Logged in as '+${user.name}"></p>
+</body>
+</html>

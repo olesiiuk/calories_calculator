@@ -3,6 +3,11 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+
     <title>Registration</title>
 </head>
 <body>
@@ -11,20 +16,24 @@
         <button type="submit">Login page</button>
     </form>
 
-    <form th:action="@{/registration}" method="post" th:object="${user}">
+    <form autocomplete="off" th:action="@{/registration}" method="post" th:object="${user}">
         <h2>Registration</h2>
         <div>
             <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="validation-message" ></label>
-            <input type="text" th:field="*{name}"/>
+            <input type="text" th:field="*{name}" th:placeholder="Name"/>
         </div>
 
         <div>
-            <input type="text" th:field="*{email}"/>
-
-
+            <input type="text" th:field="*{email}" th:placeholder="Email"/>
+            <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="validation-message "></label>
         </div>
 
-        <p><input type="password" th:field="*{password}"/></p>
+        <div>
+            <input type="password" th:field="*{password}" th:placeholder="Password"/>
+            <lable th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></lable>
+        </div>
+
+        <button type="submit">Register</button>
 
 
 

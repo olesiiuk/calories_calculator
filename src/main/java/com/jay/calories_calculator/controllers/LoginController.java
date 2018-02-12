@@ -4,8 +4,6 @@ package com.jay.calories_calculator.controllers;
 import com.jay.calories_calculator.model.domain.User;
 import com.jay.calories_calculator.model.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +22,12 @@ public class LoginController {
         this.userService = userService;
     }
 
-    @RequestMapping(value = {"/", "/login"}, method = RequestMethod.GET)
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public ModelAndView hello() {
+        return new ModelAndView("hello");
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView login() {
 
         return new ModelAndView("login");

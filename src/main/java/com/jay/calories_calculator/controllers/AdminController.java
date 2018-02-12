@@ -26,16 +26,32 @@ public class AdminController {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-        User user = userService.findUserByEmail(auth.getName());
+        User admin = userService.findUserByEmail(auth.getName());
 
-        modelAndView.addObject("userName", "Welcome " +
-                user.getName() + "(" + user.getEmail() + ")");
+        modelAndView.addObject("adminName", admin.getName());
 
         modelAndView.addObject("adminMessage",
                 "Content Available Only for Users with Admin Role");
 
         return modelAndView;
     }
+
+    @RequestMapping(value = "admin/userList", method = RequestMethod.GET)
+    public ModelAndView userList() {
+
+        ModelAndView modelAndView = new ModelAndView("admin/userList");
+
+        modelAndView.addObject("users", userService.findAllUsers());
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        User admin = userService.findUserByEmail(auth.getName());
+        modelAndView.addObject("adminName", admin.getName());
+
+        return modelAndView;
+    }
+
+
 
 
 

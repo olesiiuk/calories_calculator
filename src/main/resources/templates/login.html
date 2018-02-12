@@ -3,25 +3,73 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+
     <title>Login</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}">
 </head>
 <body>
-    <form th:action="@{/registration}" method="get">
-        <button type="submit">Registration page</button>
-    </form>
 
+    <div class="container">
 
-    <form th:action="@{/login}" method="post">
-        <input id="email" type="text" name="email" th:placeholder="Email"/>
-        <input id="password" type="text" name="password" th:placeholder="Password"/>
-
-        <div align="center" th:if="${param.error}">
-            <p style="font-size: 20px; color: #FF1C19;">Email or Password invalid, please verify</p>
+        <div th:if="${#httpServletRequest.getParameter('error')}" class="alert alert-danger" role="alert">
+            Invalid Email or Password, please verify
         </div>
 
-        <button type="submit" value="Login" name="Submit" th:text="Login"></button>
+        <form th:action="@{/login}" method="post">
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email"
+                       th:placeholder="'Enter email'">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+            </div>
 
-    </form>
+            <button type="submit" class="btn btn-primary" th:text="Login"></button>
+        </form>
+    </div>
+
+
+
+
+    <!--<div>-->
+        <!--<form th:action="@{/login}" method="post">-->
+
+            <!--<table cellpadding="left">-->
+                <!--<tr>-->
+                    <!--<th>-->
+                        <!--Email-->
+                    <!--</th>-->
+                    <!--<td>-->
+                        <!--<input id="email" type="text" name="email" th:placeholder="Email"/>-->
+                    <!--</td>-->
+                <!--</tr>-->
+                <!--<tr>-->
+                    <!--<th>-->
+                        <!--Password-->
+                    <!--</th>-->
+                    <!--<td>-->
+                        <!--<input id="password" type="password" name="password" th:placeholder="Password"/>-->
+                    <!--</td>-->
+                <!--</tr>-->
+            <!--</table>-->
+
+            <!--<div align="center" th:if="${param.error}">-->
+                <!--<p style="font-size: 20px; color: #FF1C19;">Email or Password invalid, please verify</p>-->
+            <!--</div>-->
+
+            <!--<button type="submit" value="Login" name="Submit" th:text="Login"></button>-->
+
+            <!--<form th:action="@{/registration}" method="get">-->
+                <!--<button type="submit">Registration page</button>-->
+            <!--</form>-->
+        <!--</form>-->
+    <!--</div>-->
+
 </body>
 </html>

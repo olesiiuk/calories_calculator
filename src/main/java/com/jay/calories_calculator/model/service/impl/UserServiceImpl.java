@@ -6,15 +6,19 @@ import com.jay.calories_calculator.model.repisitory.RoleRepository;
 import com.jay.calories_calculator.model.repisitory.UserRepository;
 import com.jay.calories_calculator.model.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 
 
 @Service("userService")
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService{
 
     @Autowired
     private UserRepository userRepository;
@@ -40,14 +44,21 @@ public class UserServiceImpl implements UserService {
 
         user.setActive(1);
 
-        Role userRole = roleRepository.findByRole("ADMIN");
+        Role userRole = roleRepository.findByRole("USER");
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
 
         userRepository.save(user);
 
     }
 
+    @Override
+    public List<User> findAllUsers() {
+        return userRepository.findAll();
+    }
 
-
+    @Override
+    public User findUserById(Long id) {
+        return userRepository.findOne(id);
+    }
 
 }
