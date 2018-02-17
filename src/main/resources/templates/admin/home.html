@@ -12,11 +12,19 @@
 </head>
 <body>
 
-    <p th:text="'Login as '+${adminName}"></p>
+    <!--<p th:text="'Login as '+${adminName}"></p>-->
 
-    <form th:action="@{/admin/userList}" method="get">
-        <button type="submit">Get list of users</button>
-    </form>
+    <div class="container">
+        <form th:action="@{/admin/userList}" method="get">
+            <button class="btn btn-primary" type="submit">Get list of users</button>
+        </form>
+        <form th:action="@{/admin/foodpage}" method="get">
+            <button class="btn btn-primary">Go to the food page</button>
+        </form>
+    </div>
+
+
+
 
 
 

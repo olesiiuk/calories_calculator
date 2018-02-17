@@ -11,7 +11,35 @@
     <title>Hello</title>
 </head>
 <body>
-    <div class=""></div>
+
     <h1>Unsecured hello page</h1>
+
+
+
+    <div class="container">
+        <table class="table">
+            <tr>
+                <td>
+                    <form th:action="@{/login}" method="get">
+                        <button type="submit" class="btn btn-primary" th:text="Login"></button>
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <form th:action="@{/registration}" method="get">
+                        <button type="submit" class="btn btn-primary" th:text="Registration"></button>
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <form th:action="@{/user}" method="get">
+                        <button type="submit" class="btn btn-primary" th:text="'User page'"></button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
 </body>
 </html>

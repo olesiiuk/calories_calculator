@@ -1,7 +1,6 @@
 package com.jay.calories_calculator.config;
 
 
-import com.jay.calories_calculator.model.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -49,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .csrf().disable()
                 .formLogin().loginPage("/login").permitAll()
                 .failureUrl("/login?error=true")
-                .defaultSuccessUrl("/home")
+                .defaultSuccessUrl("/successlogin")
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .and()

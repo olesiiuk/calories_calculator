@@ -32,9 +32,6 @@ public class User implements UserDetails {
     @NotEmpty(message = "*Please enter your name")
     private String name;
 
-    @Column
-    private int active;
-
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -103,14 +100,6 @@ public class User implements UserDetails {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public int getActive() {
-        return active;
-    }
-
-    public void setActive(int active) {
-        this.active = active;
     }
 
     public Set<Role> getRoles() {

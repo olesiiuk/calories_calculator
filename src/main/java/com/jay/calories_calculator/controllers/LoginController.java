@@ -1,9 +1,13 @@
 package com.jay.calories_calculator.controllers;
 
 
+import com.jay.calories_calculator.model.domain.Role;
 import com.jay.calories_calculator.model.domain.User;
+import com.jay.calories_calculator.model.service.RoleService;
 import com.jay.calories_calculator.model.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,13 +21,34 @@ public class LoginController {
 
     private UserService userService;
 
+    private RoleService roleService;
+
+
     @Autowired
-    public LoginController(UserService userService) {
+    public LoginController(UserService userService, RoleService roleService) {
         this.userService = userService;
+        this.roleService = roleService;
+    }
+
+    @RequestMapping(value = "/successlogin", method = RequestMethod.GET)
+    public ModelAndView successLoginPage() {
+        ModelAndView modelAndView = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        User currentUser = userService.findUserByEmail(auth.getName());
+        Role adminRole = roleService.findByRoleName("ADMIN");
+
+        if (currentUser.getAuthorities().contains(adminRole)) {
+            modelAndView.setViewName("redirect:/admin/home");
+        } else {
+            modelAndView.setViewName("redirect:/user/" + currentUser.getId());
+        }
+        return modelAndView;
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView hello() {
+
         return new ModelAndView("hello");
     }
 

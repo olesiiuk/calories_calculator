@@ -1,26 +1,36 @@
 package com.jay.calories_calculator.controllers;
 
+import com.jay.calories_calculator.model.domain.Food;
 import com.jay.calories_calculator.model.domain.User;
+import com.jay.calories_calculator.model.service.FoodService;
 import com.jay.calories_calculator.model.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.validation.Valid;
 
 @Controller
 public class AdminController {
 
     private UserService userService;
 
+    private FoodService foodService;
+
     @Autowired
-    public AdminController(UserService userService) {
+    public AdminController(UserService userService, FoodService foodService) {
         this.userService = userService;
+        this.foodService = foodService;
     }
 
-    @RequestMapping(value = "admin/home", method = RequestMethod.GET)
+
+
+    @RequestMapping(value = "/admin/home", method = RequestMethod.GET)
     public ModelAndView adminHome() {
         ModelAndView modelAndView = new ModelAndView("admin/home");
 
@@ -36,7 +46,7 @@ public class AdminController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "admin/userList", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/userList", method = RequestMethod.GET)
     public ModelAndView userList() {
 
         ModelAndView modelAndView = new ModelAndView("admin/userList");
@@ -51,8 +61,34 @@ public class AdminController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/admin/foodpage", method = RequestMethod.GET)
+    public ModelAndView foodPage() {
+        ModelAndView modelAndView = new ModelAndView("admin/foodpage");
+        modelAndView.addObject("food", new Food());
 
+        modelAndView.addObject("foodList", foodService.findAllFood());
 
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/admin/foodpage", method = RequestMethod.POST)
+    public ModelAndView saveFood(@Valid Food food, BindingResult bindingResult) {
+        ModelAndView modelAndView = new ModelAndView("admin/foodpage");
+        modelAndView.addObject("foodList", foodService.findAllFood());
+
+        Food existedFood = foodService.findFoodByName(food.getName());
+
+        if (existedFood != null) {
+                bindingResult.rejectValue("name", "error.food", "There is already a food with such name");
+        }
+
+        if (!bindingResult.hasErrors()) {
+            foodService.saveFood(food);
+            modelAndView.addObject("message", "new food data has been saved");
+        }
+
+        return modelAndView;
+    }
 
 
 }
