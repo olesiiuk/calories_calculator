@@ -2,8 +2,8 @@ package com.jay.calories_calculator.controllers;
 
 import com.jay.calories_calculator.model.domain.Food;
 import com.jay.calories_calculator.model.domain.User;
-import com.jay.calories_calculator.model.service.FoodService;
-import com.jay.calories_calculator.model.service.UserService;
+import com.jay.calories_calculator.model.service.api.FoodService;
+import com.jay.calories_calculator.model.service.api.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -74,7 +74,6 @@ public class AdminController {
     @RequestMapping(value = "/admin/foodpage", method = RequestMethod.POST)
     public ModelAndView saveFood(@Valid Food food, BindingResult bindingResult) {
         ModelAndView modelAndView = new ModelAndView("admin/foodpage");
-        modelAndView.addObject("foodList", foodService.findAllFood());
 
         Food existedFood = foodService.findFoodByName(food.getName());
 
@@ -84,8 +83,10 @@ public class AdminController {
 
         if (!bindingResult.hasErrors()) {
             foodService.saveFood(food);
-            modelAndView.addObject("message", "new food data has been saved");
+            modelAndView.addObject("successMessage", "New food data has been saved");
         }
+
+                modelAndView.addObject("foodList", foodService.findAllFood());
 
         return modelAndView;
     }

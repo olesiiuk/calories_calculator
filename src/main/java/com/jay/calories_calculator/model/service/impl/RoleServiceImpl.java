@@ -2,7 +2,7 @@ package com.jay.calories_calculator.model.service.impl;
 
 import com.jay.calories_calculator.model.domain.Role;
 import com.jay.calories_calculator.model.repisitory.RoleRepository;
-import com.jay.calories_calculator.model.service.RoleService;
+import com.jay.calories_calculator.model.service.api.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

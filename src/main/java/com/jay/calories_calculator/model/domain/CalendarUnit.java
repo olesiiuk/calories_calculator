@@ -1,7 +1,12 @@
 package com.jay.calories_calculator.model.domain;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import javax.validation.Valid;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "calendar")
@@ -15,9 +20,14 @@ public class CalendarUnit {
     private int value;
 
     @Column
-    private LocalDateTime date;
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    private LocalDate date;
 
-    @Column(name = "user_id", insertable = false, updatable = false)
+    @Column(columnDefinition = "varchar(8)")
+    @DateTimeFormat(pattern = "HH:mm")
+    private LocalTime time;
+
+    @Column(name = "user_id")
     private Long userId;
 
     @Column(name = "food_id", insertable = false, updatable = false)
@@ -70,11 +80,19 @@ public class CalendarUnit {
         this.value = value;
     }
 
-    public LocalDateTime getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public LocalTime getTime() {
+        return time;
+    }
+
+    public void setTime(LocalTime time) {
+        this.time = time;
     }
 }

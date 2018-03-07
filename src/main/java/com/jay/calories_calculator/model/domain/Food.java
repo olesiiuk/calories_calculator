@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Max;
 
 @Entity
 public class Food {
@@ -20,26 +21,33 @@ public class Food {
     private String name;
 
     @Column
-    @DecimalMin(value = "0.0", message = "This field can't be negative")
-    @DecimalMax(value = "9999.9",message = "Max value of this field can be 9999.9")
-    private int cal;
+    @Max(value = 9999)
+    private Integer cal;
 
     @Column
-    @DecimalMin(value = "0.0", message = "This field can't be negative")
-    @DecimalMax(value = "9999.9",message = "Max value of this field can be 9999.9")
+    @DecimalMin(value = "0", message = "This field must be from 0 to 9999.9")
+    @DecimalMax(value = "9999.9", message = "This field must be from 0 to 9999.9")
     private Double protein;
 
     @Column
-    @DecimalMin(value = "0.0", message = "This field can't be negative")
-    @DecimalMax(value = "9999.9",message = "Max value of this field can be 9999.9")
+    @DecimalMin(value = "0", message = "This field must be from 0 to 9999.9")
+    @DecimalMax(value = "9999.9", message = "This field must be from 0 to 9999.9")
     private Double starches;
 
     @Column
-    @DecimalMin(value = "0.0", message = "This field can't be negative")
-    @DecimalMax(value = "9999.9",message = "Max value of this field can be 9999.9")
+    @DecimalMin(value = "0", message = "This field must be from 0 to 9999.9")
+    @DecimalMax(value = "9999.9", message = "This field must be from 0 to 9999.9")
     private Double fats;
 
     public Food() {
+    }
+
+    public Food(String name, Integer cal, Double protein, Double starches, Double fats) {
+        this.name = name;
+        this.cal = cal;
+        this.protein = protein;
+        this.starches = starches;
+        this.fats = fats;
     }
 
     public Long getId() {
@@ -58,11 +66,11 @@ public class Food {
         this.name = name;
     }
 
-    public int getCal() {
+    public Integer getCal() {
         return cal;
     }
 
-    public void setCal(int cal) {
+    public void setCal(Integer cal) {
         this.cal = cal;
     }
 

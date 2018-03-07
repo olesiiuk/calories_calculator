@@ -8,10 +8,86 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 
+    <script type="text/javascript" th:src="@{/js/jquery-3.3.1.js}"></script>
+    <script type="text/javascript" th:src="@{/js/myScript.js}"></script>
+
+    <!--<script>-->
+        <!--$(function () {-->
+            <!--calculateData();-->
+        <!--});-->
+    <!--</script>-->
+
     <title>User page</title>
 </head>
 <body>
     <h1>User home page</h1>
     <p th:text="'Hello '+${user.getName()}"></p>
+
+
+    <div>
+        <a th:href="@{'/user/'+${user.getId()}+'/foodlist'}">Add food</a>
+    </div>
+
+    <div class="container">
+
+        <table class="table">
+            <tr>
+                <th colspan="2">
+                    <a th:text="${nowDate.minusDays(1)}"
+                       th:href="@{'/user/'+${user.getId()}+'/?date='+${nowDate.minusDays(1)}}"
+                       class="btn btn-primary btn-lg active" role="button" aria-pressed="true"></a>
+                </th>
+                <th colspan="4">
+                    <span th:text="'Current date: '+${nowDate}"></span>
+                </th>
+                <th colspan="2">
+                    <a th:text="${nowDate.plusDays(1)}"
+                       th:href="@{'/user/'+${user.getId()}+'/?date='+${nowDate.plusDays(1)}}"
+                       class="btn btn-primary btn-lg active" role="button" aria-pressed="true"></a>
+                </th>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Name</th>
+                <th>Calories</th>
+                <th>Proteins</th>
+                <th>Fats</th>
+                <th>Starches</th>
+                <th>Value</th>
+            </tr>
+            <tr th:each="unit : ${calendarUnits}" class="foodTr">
+                <td th:text="${unit.getDate()}"></td>
+                <td th:text="${unit.getTime()}"></td>
+                <td th:text="${unit.getFood().getName()}"></td>
+                <td class="cal" th:text="(${unit.getFood().getCal()}/100)*${unit.getValue()}"></td>
+                <td class="protein" th:text="(${unit.getFood().getProtein()}/100)*${unit.getValue()}"></td>
+                <td class="fats" th:text="(${unit.getFood().getFats()})/100*${unit.getValue()}"></td>
+                <td class="starches" th:text="(${unit.getFood().getStarches()}/100)*${unit.getValue()}"></td>
+                <td class="value" th:text="${unit.getValue()}"></td>
+            </tr>
+            <tr>
+                <th colspan="6">
+                    Total
+                </th>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td th:text="${sum.getCalories()}"></td>
+                <td th:text="${sum.getProteins()}"></td>
+                <td th:text="${sum.getFats()}"></td>
+                <td th:text="${sum.getStarches()}"></td>
+            </tr>
+        </table>
+
+        <div id="testDiv">Test message</div>
+        <button type="button" onclick="testAlert()">Test button</button>
+    </div>
+
+
+
+
 </body>
 </html>

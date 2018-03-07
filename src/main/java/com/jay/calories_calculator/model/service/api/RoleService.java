@@ -1,4 +1,4 @@
-package com.jay.calories_calculator.model.service;
+package com.jay.calories_calculator.model.service.api;
 
 import com.jay.calories_calculator.model.domain.Role;
 

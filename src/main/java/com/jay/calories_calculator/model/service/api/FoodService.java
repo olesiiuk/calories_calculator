@@ -1,4 +1,4 @@
-package com.jay.calories_calculator.model.service;
+package com.jay.calories_calculator.model.service.api;
 
 import com.jay.calories_calculator.model.domain.Food;
 
@@ -11,4 +11,6 @@ public interface FoodService {
     void saveFood(Food food);
 
     Food findFoodByName(String name);
+
+    Food findFoodById(Long id);
 }

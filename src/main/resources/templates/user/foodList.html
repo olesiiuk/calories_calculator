@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+
+    <link rel="stylesheet" th:href="@{/css/mycss.css}">
+
+    <title>Food List</title>
+</head>
+<body>
+
+    <div class="container">
+        <p th:text="'Hello, '+${user.getName()}"></p>
+        <a type="button" class="btn btn-outline-info" th:href="@{/logout}">Logout</a>
+    </div>
+
+
+    <h1 style="margin-left: 10%">
+        Food list
+    </h1>
+
+    <div class="container">
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Calories</th>
+                <th>Proteins</th>
+                <th>Fats</th>
+                <th>Starches</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <!--<th>Date</th>-->
+                <!--<th>Time</th>-->
+                <!--<th>Quantity</th>-->
+                <!--<th>Add</th>-->
+            </tr>
+            <tr th:each="foodd : ${foodList}">
+                <td th:text="${foodd.getName()}"></td>
+                <td th:text="${foodd.getCal()}"></td>
+                <td th:text="${foodd.getProtein()}"></td>
+                <td th:text="${foodd.getFats()}"></td>
+                <td th:text="${foodd.getStarches()}"></td>
+                <td colspan="4" align="right">
+                    <form th:action="@{'/user/'+${user.getId()}+'/addfood'}" method="post" th:object="${calendarUnit}">
+                        <input type="hidden" name="foodId" th:value="${foodd.getId()}">
+                        <input type="hidden" name="userId" th:value="${user.getId()}">
+                        <table>
+                            <tr>
+                                <td>
+                                    <label th:if="${#fields.hasErrors('date')}"></label>
+                                    <input type="text" name="date" th:value="${nowDate}" th:placeholder="'dd-MM-yyyy'"/>
+                                </td>
+                                <td>
+                                    <select name="time">
+                                        <option th:value="${nowTime}" th:text="${nowTime}"></option>
+                                        <option th:each="hour : ${hours}"
+                                                th:value="${hour}" th:text="${hour}">
+                                        </option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <label for="value"></label>
+                                    <input type="number" id="value" name="value" th:placeholder="value"/>
+                                </td>
+                                <td>
+                                    <button type="submit" class="btn btn-success">Add food</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+
+</body>
+</html>

@@ -14,6 +14,14 @@
 
     <div class="container">
             <form th:action="@{/admin/foodpage}" method="post" th:object="${food}">
+                <!--<div class="alert alert-warning" role="alert">-->
+                    <!--This is a warning alert—check it out!-->
+                <!--</div>-->
+
+                <div class="alert alert-success" role="alert"
+                     th:if="${successMessage}!=null" th:text="${successMessage}">
+                </div>
+
                 <table>
                     <tr>
                         <th>Name</th>
@@ -22,27 +30,26 @@
                         <th>Fats</th>
                         <th>Starches</th>
                     </tr>
-
                     <tr>
                         <td>
-                            <label th:if="${#fields.hasErrors('name')}" th:errors="${food.cal}"></label>
                             <input type="text" th:field="${food.name}" th:placeholder="'Food name'">
+                            <label th:if="${#fields.hasErrors('name')}" th:errors="${food.name}" class="validation-message"></label>
                         </td>
                         <td>
-                            <label th:if="${#fields.hasErrors('cal')}" th:errors="${food.cal}"></label>
-                            <input type="text" th:field="${food.cal}" th:placeholder="Calories">
+                            <input th:field="${food.cal}" th:placeholder="Calories">
+                            <label th:if="${#fields.hasErrors('cal')}" th:errors="${food.cal}" class="validation-message"></label>
                         </td>
                         <td>
-                            <label th:if="${#fields.hasErrors('protein')}" th:errors="${food.protein}"></label>
-                            <input type="text" th:field="${food.protein}" th:placeholder="Proteins">
+                            <input th:field="${food.protein}" th:placeholder="Proteins">
+                            <label th:if="${#fields.hasErrors('protein')}" th:errors="${food.protein}" class="validation-message"></label>
                         </td>
                         <td>
-                            <label th:if="${#fields.hasErrors('fats')}" th:errors="${food.fats}"></label>
-                            <input type="text" th:field="${food.fats}" th:placeholder="Fats">
+                            <input th:field="${food.fats}" th:placeholder="Fats">
+                            <label th:if="${#fields.hasErrors('fats')}" th:errors="${food.fats}" class="validation-message"></label>
                         </td>
                         <td>
-                            <label th:if="${#fields.hasErrors('starches')}" th:errors="${food.starches}"></label>
-                            <input type="text" th:field="${food.starches}" th:placeholder="Startches">
+                            <input th:field="${food.starches}" th:placeholder="Startches">
+                            <label th:if="${#fields.hasErrors('starches')}" th:errors="${food.starches}" class="validation-message"></label>
                         </td>
                         <td>
                             <button type="submit">Save</button>

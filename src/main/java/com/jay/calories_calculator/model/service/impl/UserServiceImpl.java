@@ -4,11 +4,8 @@ import com.jay.calories_calculator.model.domain.Role;
 import com.jay.calories_calculator.model.domain.User;
 import com.jay.calories_calculator.model.repisitory.RoleRepository;
 import com.jay.calories_calculator.model.repisitory.UserRepository;
-import com.jay.calories_calculator.model.service.UserService;
+import com.jay.calories_calculator.model.service.api.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 

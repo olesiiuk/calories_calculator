@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+
+    <title>Food List</title>
+</head>
+<body>
+
+    <h1>Food List !</h1>
+    <h2 th:text="'Hello '+${user.getName()}"></h2>
+
+
+    <div class="container">
+        <form th:action="@{'/user/'+${user.getId()}+'/addfood'}" method="post">
+            <table class="table">
+                <tr>
+                    <th>Name</th>
+                    <th>Calories</th>
+                    <th>Proteins</th>
+                    <th>Fats</th>
+                    <th>Starches</th>
+                    <th>Date</th>
+                    <td>Time</td>
+                    <th>Quantity</th>
+                    <th>Add</th>
+                </tr>
+                <tr th:each="foodd : ${foodList}">
+                    <td th:text="${foodd.getName()}"></td>
+                    <td th:text="${foodd.getCal()}"></td>
+                    <td th:text="${foodd.getProtein()}"></td>
+                    <td th:text="${foodd.getFats()}"></td>
+                    <td th:text="${foodd.getStarches()}"></td>
+                    <td>
+                        <input type="text" name="date1" th:value="${nowDate}"/>
+                    </td>
+                    <td>
+                        <select name="time1">
+                            <option th:value="${nowTime}" th:text="${nowTime}"></option>
+                            <option th:each="hour : ${hours}"
+                                    th:value="${hour}" th:text="${hour}">
+                            </option>
+                        </select>
+                    </td>
+                    <td>
+                        <label for="value"></label>
+                        <input type="number" id="value" name="value" th:placeholder="value"/>
+
+
+                    </td>
+                    <td>
+                        <button type="submit" class="btn btn-success">Add food</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+</html>

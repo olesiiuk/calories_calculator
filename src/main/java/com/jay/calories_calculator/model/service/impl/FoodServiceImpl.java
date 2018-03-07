@@ -2,7 +2,7 @@ package com.jay.calories_calculator.model.service.impl;
 
 import com.jay.calories_calculator.model.domain.Food;
 import com.jay.calories_calculator.model.repisitory.FoodRepository;
-import com.jay.calories_calculator.model.service.FoodService;
+import com.jay.calories_calculator.model.service.api.FoodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,5 +28,10 @@ public class FoodServiceImpl implements FoodService {
     @Override
     public Food findFoodByName(String name) {
         return foodRepository.findFoodByName(name);
+    }
+
+    @Override
+    public Food findFoodById(Long id) {
+        return foodRepository.findOne(id);
     }
 }

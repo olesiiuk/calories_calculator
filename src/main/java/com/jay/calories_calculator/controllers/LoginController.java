@@ -3,8 +3,8 @@ package com.jay.calories_calculator.controllers;
 
 import com.jay.calories_calculator.model.domain.Role;
 import com.jay.calories_calculator.model.domain.User;
-import com.jay.calories_calculator.model.service.RoleService;
-import com.jay.calories_calculator.model.service.UserService;
+import com.jay.calories_calculator.model.service.api.RoleService;
+import com.jay.calories_calculator.model.service.api.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
