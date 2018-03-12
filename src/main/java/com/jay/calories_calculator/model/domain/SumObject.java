@@ -58,10 +58,14 @@ public class SumObject {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SumObject sumObject = (SumObject) o;
-        return getCalories() == sumObject.getCalories() &&
-                Objects.equals(getProteins(), sumObject.getProteins()) &&
-                Objects.equals(getFats(), sumObject.getFats()) &&
-                Objects.equals(getStarches(), sumObject.getStarches());
+
+        boolean isEqualCal = getCalories().compareTo(sumObject.getCalories()) == 0;
+        boolean isEqualProteins = getProteins().compareTo(sumObject.getProteins()) == 0;
+        boolean isEqualFats = getFats().compareTo(sumObject.getFats()) == 0;
+        boolean isEqualStarches = getStarches().compareTo(sumObject.getStarches()) == 0;
+
+        return isEqualCal && isEqualProteins && isEqualFats && isEqualStarches;
+
     }
 
     @Override

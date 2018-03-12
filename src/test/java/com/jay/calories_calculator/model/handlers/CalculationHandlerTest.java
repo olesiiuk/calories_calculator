@@ -5,7 +5,6 @@ import com.jay.calories_calculator.model.domain.Food;
 import com.jay.calories_calculator.model.domain.SumObject;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -32,6 +31,8 @@ public class CalculationHandlerTest {
 
         SumObject result = handler.calculateSum(list);
         SumObject expected = new SumObject(2d, 3.0, 4.2, 3.4);
+
+
         assertEquals(result, expected);
     }
 
