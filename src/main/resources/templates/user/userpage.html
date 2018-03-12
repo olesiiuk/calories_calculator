@@ -60,10 +60,10 @@
                 <td th:text="${unit.getDate()}"></td>
                 <td th:text="${unit.getTime()}"></td>
                 <td th:text="${unit.getFood().getName()}"></td>
-                <td class="cal" th:text="(${unit.getFood().getCal()}/100)*${unit.getValue()}"></td>
-                <td class="protein" th:text="(${unit.getFood().getProtein()}/100)*${unit.getValue()}"></td>
-                <td class="fats" th:text="(${unit.getFood().getFats()})/100*${unit.getValue()}"></td>
-                <td class="starches" th:text="(${unit.getFood().getStarches()}/100)*${unit.getValue()}"></td>
+                <td class="cal" th:text="${unit.getFood().getCal()}"></td>
+                <td class="protein" th:text="${unit.getFood().getProtein()}"></td>
+                <td class="fats" th:text="${unit.getFood().getFats()}"></td>
+                <td class="starches" th:text="${unit.getFood().getStarches()}"></td>
                 <td class="value" th:text="${unit.getValue()}"></td>
             </tr>
             <tr>

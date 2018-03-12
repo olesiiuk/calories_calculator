@@ -3,9 +3,7 @@ package com.jay.calories_calculator.model.domain;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.Valid;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Entity
@@ -33,7 +31,7 @@ public class CalendarUnit {
     @Column(name = "food_id", insertable = false, updatable = false)
     private Long foodId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "food_id", nullable = false)
     private Food food;
 

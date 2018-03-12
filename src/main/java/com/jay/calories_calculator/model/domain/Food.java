@@ -99,4 +99,15 @@ public class Food {
     }
 
 
+    @Override
+    public String toString() {
+        return "Food{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", cal=" + cal +
+                ", protein=" + protein +
+                ", starches=" + starches +
+                ", fats=" + fats +
+                '}';
+    }
 }

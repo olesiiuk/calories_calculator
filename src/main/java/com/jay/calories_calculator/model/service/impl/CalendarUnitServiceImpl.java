@@ -6,6 +6,7 @@ import com.jay.calories_calculator.model.service.api.CalendarUnitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -13,11 +14,19 @@ import java.util.List;
 public class CalendarUnitServiceImpl implements CalendarUnitService {
 
     @Autowired
+    private EntityManager entityManager;
+
+    @Autowired
     private CalendarUnitRepository calendarUnitRepository;
 
     @Override
     public List<CalendarUnit> findByUserIdAndDate(Long userId, LocalDate date) {
-        return calendarUnitRepository.findByUserIdAndDate(userId, date);
+
+        List<CalendarUnit> calendarUnits = calendarUnitRepository.findByUserIdAndDate(userId, date);
+
+        calendarUnits.forEach(entityManager::detach);
+
+        return calendarUnits;
     }
 
     @Override
@@ -32,6 +41,12 @@ public class CalendarUnitServiceImpl implements CalendarUnitService {
 
     @Override
     public List<CalendarUnit> findByUserIdAndDateBetween(Long id, LocalDate firsDate, LocalDate lastDate) {
-        return calendarUnitRepository.findByUserIdAndDateBetweenOrderByTime(id, firsDate, lastDate);
+
+        List<CalendarUnit> calendarUnits =
+                calendarUnitRepository.findByUserIdAndDateBetweenOrderByTime(id, firsDate, lastDate);
+
+        calendarUnits.forEach(calendarUnit -> entityManager.detach(calendarUnit));
+
+        return calendarUnits;
     }
 }
