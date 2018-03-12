@@ -97,4 +97,6 @@ public class Food {
     public void setFats(Double fats) {
         this.fats = fats;
     }
+
+
 }

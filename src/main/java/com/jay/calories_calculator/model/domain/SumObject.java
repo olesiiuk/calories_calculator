@@ -3,7 +3,7 @@ package com.jay.calories_calculator.model.domain;
 import java.util.Objects;
 
 public class SumObject {
-    private int calories;
+    private Double calories;
 
     private Double proteins;
 
@@ -14,18 +14,18 @@ public class SumObject {
     public SumObject() {
     }
 
-    public SumObject(int calories, Double proteins, Double starches, Double fats) {
+    public SumObject(Double calories, Double proteins, Double starches, Double fats) {
         this.calories = calories;
         this.proteins = proteins;
         this.fats = fats;
         this.starches = starches;
     }
 
-    public int getCalories() {
+    public Double getCalories() {
         return calories;
     }
 
-    public void setCalories(int calories) {
+    public void setCalories(Double calories) {
         this.calories = calories;
     }
 

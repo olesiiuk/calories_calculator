@@ -10,7 +10,7 @@ import java.util.List;
 public class CalculationHandler {
     public SumObject calculateSum(List<CalendarUnit> foodList) {
 
-        int cal = 0;
+        double cal = 0;
         double proteins = 0;
         double fats = 0;
         double starches = 0;
@@ -19,14 +19,20 @@ public class CalculationHandler {
 
             int value = unit.getValue();
 
-            cal += (unit.getFood().getCal() / 100) * value;
-            proteins += (unit.getFood().getProtein() / 100) * value;
-            fats += (unit.getFood().getFats() / 100) * value;
-            starches += (unit.getFood().getStarches() / 100) * value;
+            cal += formatDouble((((double)unit.getFood().getCal()) / 100) * value);
+
+            proteins += formatDouble((unit.getFood().getProtein() / 100) * value);
+            fats += formatDouble((unit.getFood().getFats() / 100) * value);
+            starches += formatDouble((unit.getFood().getStarches() / 100) * value);
         }
 
         SumObject result = new SumObject(cal, proteins, starches, fats);
 
         return result;
+    }
+
+    private double formatDouble(double d) {
+        double dd = Math.pow(10, 2);
+        return Math.round(d * dd) / dd;
     }
 }
